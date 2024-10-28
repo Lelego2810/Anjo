@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parabéns</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f3e5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            overflow: hidden; /* Evita rolagem */
+        }
+
+        /* Botões */
+        .button {
+            padding: 15px 30px;
+            font-size: 1.5em;
+            color: white;
+            background-color: #8e24aa;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+            margin: 10px 0;
+        }
+
+        .button:hover {
+            background-color: #6d1b7b;
+        }
+
+        /* Esconde os botões e o cartão inicialmente */
+        #button2, #button3, #parabens-card, #frases-card {
+            display: none;
+        }
+
+        /* Página de Parabéns */
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            width: 100%;
+            overflow: hidden;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative; /* Permite o posicionamento absoluto dos filhos */
+        }
+
+        h1 {
+            color: #8e24aa;
+            font-size: 3em;
+        }
+
+        p {
+            font-size: 1.5em;
+            color: #333;
+            margin: 20px 0;
+        }
+
+        .message {
+            background-color: #f8bbd0;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .photo {
+            max-width: 200px;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+
+        .photo img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Para mostrar a imagem com o efeito */
+        .show-photo {
+            opacity: 1;
+        }
+
+        /* Estilo do botão sobre a foto */
+        #sobre-mim {
+            position: absolute; /* Posiciona o botão sobre a foto */
+            top: 50%; /* Centraliza verticalmente */
+            left: 50%; /* Centraliza horizontalmente */
+            transform: translate(-50%, -50%); /* Move o botão para o centro */
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: white;
+            background-color: rgba(142, 36, 170, 0.5); /* Fundo transparente */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 2; /* Coloca o botão acima da imagem */
+            transition: background-color 0.3s;
+        }
+
+        #sobre-mim:hover {
+            background-color: rgba(142, 36, 170, 0.7); /* Escurece ao passar o mouse */
+        }
+
+        /* Página de Frases */
+        #frases-card {
+            text-align: center;
+            display: none;
+            position: relative; /* Para o posicionamento das frases */
+            height: 80vh; /* Altura para limitar o espaço das frases */
+            overflow: hidden; /* Para evitar que as frases saiam do contêiner */
+        }
+
+        .frase {
+            font-size: 2em;
+            color: #333;
+            opacity: 0;
+            transition: opacity 1s ease-in;
+            margin: 20px 0; /* Margem para espaço entre as frases */
+        }
+
+        .show-frase {
+            opacity: 1; /* Mostra a frase */
+        }
+
+        #voltar {
+            margin-top: 20px; /* Margem para separar do resto */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Primeiro Botão -->
+<button id="button1" class="button">Aperte-me</button>
+
+<!-- Segundo Botão -->
+<button id="button2" class="button">Está curiosa? Aperte-me de novo</button>
+
+<!-- Terceiro Botão -->
+<button id="button3" class="button">Esse é o último, prometo. Aperte-me</button>
+
+<!-- Página de Parabéns (inicialmente oculta) -->
+<div class="card" id="parabens-card">
+    <h1>Feliz aniversário!!</h1>
+    <p class="message">Agradeço por mais um ano por ter conhecido essa pessoa incrível, inteligente, adorável, perfeita, Te adoro demais.</p>
+    <div class="photo" id="parabens-photo">
+        <img src="foto-dela.jpg.jpg" alt="Foto dela">
+        <button id="sobre-mim">Mais um Botao, Aperte-me</button> <!-- Botão sobre a foto -->
+    </div>
+</div>
+
+<!-- Página de Frases (inicialmente oculta) -->
+<div id="frases-card">
+    <h1>Frases So a Gente Entende Anjo</h1>
+    <p class="frase" id="frase1">"Batata Paulo Batata."</p>
+    <p class="frase" id="frase2">"Rexona, Nao te Abandona."</p>
+    <p class="frase" id="frase3">"Anjuu Anjuu."</p>
+    <p class="frase" id="frase4">"Eu poderia te falar que te amo, anjo, mas eu prefiro dizer: "</p>
+    <p class="frase" id="frase3">"Se eu pudesse conjurar um patrono, minha memória mais feliz seria ao seu lado."</p>
+    <button id="voltar" class="button">Voltar</button>
+</div>
+
+<!-- Script para alternar entre os botões e mostrar o conteúdo -->
+<script>
+    // Botão 1 -> Mostra o botão 2
+    document.getElementById('button1').addEventListener('click', function() {
+        document.getElementById('button1').style.display = 'none'; // Esconde o primeiro botão
+        document.getElementById('button2').style.display = 'block'; // Mostra o segundo botão
+    });
+
+    // Botão 2 -> Mostra o botão 3
+    document.getElementById('button2').addEventListener('click', function() {
+        document.getElementById('button2').style.display = 'none'; // Esconde o segundo botão
+        document.getElementById('button3').style.display = 'block'; // Mostra o terceiro botão
+    });
+
+    // Botão 3 -> Mostra a página de Parabéns com o efeito
+    document.getElementById('button3').addEventListener('click', function() {
+        document.getElementById('button3').style.display = 'none'; // Esconde o terceiro botão
+        document.getElementById('parabens-card').style.display = 'block'; // Mostra o cartão de parabéns
+        
+        // Aguarda um pequeno tempo e aplica o efeito na foto
+        setTimeout(function() {
+            document.getElementById('parabens-photo').classList.add('show-photo');
+        }, 200);  // Atraso de 200ms para começar o efeito
+    });
+
+    // Botão "Sobre mim" -> Mostra a página de frases
+    document.getElementById('sobre-mim').addEventListener('click', function() {
+        document.getElementById('parabens-card').style.display = 'none'; // Esconde o cartão de parabéns
+        document.getElementById('frases-card').style.display = 'block'; // Mostra a página de frases
+        
+        // Apresenta as frases em sequência
+        const frases = document.querySelectorAll('.frase');
+
+        frases.forEach((frase, index) => {
+            // Apresenta a frase após um atraso
+            setTimeout(() => {
+                frase.classList.add('show-frase');
+                frase.style.opacity = 1; // Define a opacidade para 1 para mostrar
+            }, index * 1000); // Apresenta uma frase a cada segundo
+        });
+    });
+
+    // Botão "Voltar" -> Volta à página de Parabéns
+    document.getElementById('voltar').addEventListener('click', function() {
+        document.getElementById('frases-card').style.display = 'none'; // Esconde a página de frases
+        document.getElementById('parabens-card').style.display = 'block'; // Mostra novamente o cartão de parabéns
+    });
+</script>
+
+</body>
+</html>
